@@ -5,6 +5,8 @@ import ImageListItem from '@material-ui/core/ImageListItem';
 import Box from '@material-ui/core/Box';
 import Search from './Search';
 import './sass/MainPageSass.scss';
+import Toggle from './toggle';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const Mainpage = (props) => {
 	const [images, setImages] = useState();
@@ -60,6 +62,8 @@ const Mainpage = (props) => {
 	return (
 		<div>
 			<h2>Hello</h2>
+			<FormControlLabel control={<Toggle />} label='Toggle dark/light' />
+
 			<Search
 				setQuery={setQuery}
 				query={query}

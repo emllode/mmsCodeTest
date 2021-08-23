@@ -3,10 +3,10 @@
 		display: flex;
 		align-items: center;
 		height: 30px;
-		border: 1px solid Lightgray;
+		border: 1px solid rgb(0, 0, 0);
 		padding: 10px 20px;
 		border-radius: 999px;
-		width: 75vw;
+		width: 30vw;
 		margin: 0 auto;
 		margin-top: 40px;
 		max-width: 560px;
@@ -15,7 +15,9 @@
 			flex: 1;
 			padding: 10px 20px;
 			font-size: medium;
+			outline: none;
 			border: none;
+			background-color: transparent;
 		}
 
 		> input:focus {

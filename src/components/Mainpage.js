@@ -7,6 +7,7 @@ import Search from './Search';
 import './sass/MainPageSass.scss';
 import Toggle from './toggle';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const Mainpage = (props) => {
 	const [images, setImages] = useState();
@@ -14,8 +15,9 @@ const Mainpage = (props) => {
 	const [query, setQuery] = useState('');
 	const { REACT_APP_ACCESS_KEY } = process.env;
 
-	let savedData = (data) => {
-		setImages(data);
+	let savedData = async (data) => {
+		await setImages(data);
+		setLoading(false);
 	};
 
 	const Searchpage = async (e) => {
@@ -28,8 +30,6 @@ const Mainpage = (props) => {
 		);
 		console.log(data.results);
 		setImages(data.results);
-
-		setLoading(false);
 	};
 
 	let queryFilterOnChange = (e) => {
@@ -42,7 +42,6 @@ const Mainpage = (props) => {
 
 	useEffect(() => {
 		FirstPageLoad();
-		setLoading(false);
 	}, [query.length < 1]);
 
 	const FirstPageLoad = async () => {
@@ -61,30 +60,38 @@ const Mainpage = (props) => {
 
 	return (
 		<div>
-			<h2>Hello</h2>
-			<FormControlLabel control={<Toggle />} label='Toggle dark/light' />
-
-			<Search
-				setQuery={setQuery}
-				query={query}
-				Searchpage={Searchpage}
-				queryFilterOnChange={queryFilterOnChange}
-			/>
-			<Box className={'wholeImageList'}>
-				<ImageList cols={3} gap={7}>
-					{images &&
-						images.map((item) => (
-							<ImageListItem key={item.id}>
-								<img
-									src={item.urls.small}
-									alt={item.alt_description}
-									width={images.width}
-									height={images.height}
-								/>
-							</ImageListItem>
-						))}
-				</ImageList>
+			<Box display='flex' justifyContent='center' m={1} p={1}>
+				<Search
+					setQuery={setQuery}
+					query={query}
+					Searchpage={Searchpage}
+					queryFilterOnChange={queryFilterOnChange}
+				/>
+				<FormControlLabel control={<Toggle />} label='Toggle dark/light' />
 			</Box>
+			{loading ? (
+				<Box className={'wholeImageList'}>
+					<ImageList cols={3} gap={7}>
+						{images &&
+							images.map((item) => (
+								<ImageListItem key={item.id}>
+									<Skeleton variant='rect' width={500} height={450} />
+								</ImageListItem>
+							))}
+					</ImageList>
+				</Box>
+			) : (
+				<Box className={'wholeImageList'}>
+					<ImageList cols={3} gap={7}>
+						{images &&
+							images.map((item) => (
+								<ImageListItem key={item.id}>
+									<img src={item.urls.small} alt={item.alt_description} />
+								</ImageListItem>
+							))}
+					</ImageList>
+				</Box>
+			)}
 		</div>
 	);
 };

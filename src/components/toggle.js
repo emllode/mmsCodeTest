@@ -36,7 +36,7 @@ function Toggle() {
 				onChange={handleOnClick}
 				className='toggle--checkbox'
 				name='checkedA'
-				inputProps={{ 'aria-label': 'secondary checkbox' }}
+				inputProps={{ 'aria-label': 'primary checkbox' }}
 			/>
 		</div>
 	);

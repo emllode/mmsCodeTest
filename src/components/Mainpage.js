@@ -14,6 +14,7 @@ const Mainpage = (props) => {
 	const [query, setQuery] = useState('');
 	const { REACT_APP_ACCESS_KEY } = process.env;
 
+	/*Func that does all fetches */
 	const Searchpage = async (e) => {
 		setImages(null);
 
@@ -39,6 +40,7 @@ const Mainpage = (props) => {
 		}
 	};
 
+	/*get query from input*/
 	let queryFilterOnChange = (e) => {
 		console.log(e.target.value + 'this is target value');
 		setQuery(e.target.value);
@@ -52,6 +54,7 @@ const Mainpage = (props) => {
 		Searchpage();
 	}, []);
 
+	/*Lodash for creating n amount of Skeleton*/
 	let skeletonCards = [];
 	_.times(8, (i) => {
 		skeletonCards.push(

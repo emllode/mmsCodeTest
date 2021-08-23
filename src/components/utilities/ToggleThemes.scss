@@ -8,7 +8,11 @@
 	input,
 	select,
 	textarea {
-		color: #f9f8f8;
+		color: #b5b5b5;
+	}
+
+	.search__input {
+		border: 1px solid #b5b5b5;
 	}
 }
 
@@ -23,6 +27,9 @@
 	select,
 	textarea {
 		color: #5e4b56;
+	}
+	.search__input {
+		border: 1px solid rgb(0, 0, 0);
 	}
 }
 

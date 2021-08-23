@@ -1,7 +1,24 @@
 @import './mixins';
 @include breakpoint-up(medium) {
 	.wholeImageList {
-		width: 50%;
+		width: 60%;
 		margin: 0 auto;
 	}
+}
+
+@include breakpoint-up(large) {
+	.wholeImageList {
+        padding: 50px;
+        max-width: 50%;
+		margin: 0 auto;
+	}
+
+}
+
+.wholeImageList {
+    margin: 0 auto;
+}
+.MuiImageListItem-root {
+    height: 50% !important;
+    width: auto!important;
 }

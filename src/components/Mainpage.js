@@ -9,6 +9,8 @@ import './sass/MainPageSass.scss';
 
 const Mainpage = (props) => {
 	const [images, setImages] = useState();
+	const [loading, setLoading] = useState(false);
+	const [query, setQuery] = useState('');
 	const { REACT_APP_ACCESS_KEY } = process.env;
 
 	let savedData = (data) => {
@@ -30,6 +32,7 @@ const Mainpage = (props) => {
 	}, []);
 
 	const FirstPageLoad = async () => {
+		setLoading(true);
 		const fetchImages = async () => {
 			const { data } = await axios(
 				`https://api.unsplash.com/photos/?client_id=${REACT_APP_ACCESS_KEY}
@@ -38,37 +41,27 @@ const Mainpage = (props) => {
 			savedData(data);
 		};
 		fetchImages();
+		setLoading(false);
 	};
 
 	const classes = useStyles();
 	console.log(images);
 
 	return (
-		// <div>
-		// 	<h2>Hello</h2>
-		// 	<ImageList
-		// 		variant='quilted'
-		// 		cols={4}
-		// 		rowHeight={121}
-		// 		className={classes.imageList}
-		// 	>
-		// 		{images &&
-		// 			images.map((item) => (
-		// 				<ImageListItem key={item.img} cols={item.cols || 1}>
-		// 					<img src={item.urls.regular} alt={item.alt_description} />
-		// 				</ImageListItem>
-		// 			))}
-		// 	</ImageList>
-		// </div>
 		<div>
 			<h2>Hello</h2>
-			<Search />
+			<Search setImages={setImages} />
 			<Box className={'wholeImageList'}>
-				<ImageList variant='masonry' cols={3} gap={8}>
+				<ImageList cols={3} gap={7}>
 					{images &&
 						images.map((item) => (
 							<ImageListItem key={item.id}>
-								<img src={item.urls.small} alt={item.alt_description} />
+								<img
+									src={item.urls.small}
+									alt={item.alt_description}
+									width={images.width}
+									height={images.height}
+								/>
 							</ImageListItem>
 						))}
 				</ImageList>

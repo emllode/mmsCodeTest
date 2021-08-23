@@ -1,5 +1,6 @@
 import './App.scss';
 import Mainpage from './components/Mainpage';
+import './components/sass/mixins.scss';
 
 function App() {
 	return (

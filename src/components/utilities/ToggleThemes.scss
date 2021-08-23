@@ -5,6 +5,11 @@
 	--light-background: #586f7c;
 	--accent: #b8dbd9;
 	--button-border: #b8dbd9;
+	input,
+	select,
+	textarea {
+		color: #f9f8f8;
+	}
 }
 
 .theme-light {
@@ -14,6 +19,11 @@
 	--light-background: #eee9e6;
 	--accent: #dbe7e4;
 	--button-border: #5e4b56;
+	input,
+	select,
+	textarea {
+		color: #5e4b56;
+	}
 }
 
 html,

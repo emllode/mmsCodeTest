@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-
 const useStyles = makeStyles((theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(2),
@@ -40,14 +39,6 @@ export default function Navbar(props) {
 					}
 				/>
 			</Toolbar>
-
-			{/* <Search
-				setQuery={props.setQuery}
-				query={props.query}
-				Searchpage={props.Searchpage}
-				queryFilterOnChange={props.queryFilterOnChange}
-			/>
-			<FormControlLabel control={<Toggle />} label='Toggle dark/light' /> */}
 		</div>
 	);
 }

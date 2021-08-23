@@ -9,13 +9,15 @@
 @include breakpoint-up(large) {
 	.wholeImageList {
 		padding: 50px;
-		max-width: 50%;
+
 		margin: 0 auto;
 	}
 }
 
 .wholeImageList {
-	margin: 0 auto;
+	padding: 25px;
+	max-width: 100%;
+	max-height: 100%;
 }
 .MuiImageListItem-root {
 	height: 50% !important;
@@ -24,4 +26,11 @@
 
 .toggle--checkbox {
 	margin-left: 30px;
+}
+
+input[type='search'],
+input[type='search']:focus {
+	background: transparent;
+	border: none;
+	outline-width: 0;
 }

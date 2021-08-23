@@ -3,7 +3,7 @@ import './utilities/ToggleThemes.scss';
 import { setTheme } from './utilities/themes';
 import Switch from '@material-ui/core/Switch';
 function Toggle() {
-	const [togClass, setTogClass] = useState('dark');
+	const [togClass, setTogClass] = useState('light');
 	const [state, setState] = React.useState({
 		checkedA: true,
 		checkedB: true,

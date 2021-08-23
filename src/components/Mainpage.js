@@ -3,10 +3,7 @@ import axios from 'axios';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import Box from '@material-ui/core/Box';
-import Search from './Search';
 import './sass/MainPageSass.scss';
-import Toggle from './toggle';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Skeleton from '@material-ui/lab/Skeleton';
 import _ from 'lodash';
 import Navbar from './Navbar';
@@ -17,19 +14,29 @@ const Mainpage = (props) => {
 	const [query, setQuery] = useState('');
 	const { REACT_APP_ACCESS_KEY } = process.env;
 
-	let savedData = (data) => {
-		setImages(data);
-	};
-
 	const Searchpage = async (e) => {
 		setImages(null);
-		const { data } = await axios.get(
-			`https://api.unsplash.com/search/photos/?client_id=${REACT_APP_ACCESS_KEY}&query=${e.target.value}
+
+		if (!e) {
+			const fetchImages = async () => {
+				const { data } = await axios(
+					`https://api.unsplash.com/photos/?client_id=${REACT_APP_ACCESS_KEY}
+					`
+				);
+				setImages(data);
+				console.log(data);
+			};
+			fetchImages();
+			setLoading(false);
+		} else {
+			const { data } = await axios.get(
+				`https://api.unsplash.com/search/photos/?client_id=${REACT_APP_ACCESS_KEY}&query=${e.target.value}
 				`
-		);
-		console.log(data.results);
-		setImages(data.results);
-		setLoading(!loading);
+			);
+			console.log(data.results);
+			setImages(data.results);
+			setLoading(!loading);
+		}
 	};
 
 	let queryFilterOnChange = (e) => {
@@ -42,22 +49,9 @@ const Mainpage = (props) => {
 	};
 
 	useEffect(() => {
-		FirstPageLoad();
-	}, [!query]);
+		Searchpage();
+	}, []);
 
-	const FirstPageLoad = async () => {
-		setLoading(true);
-		const fetchImages = async () => {
-			const { data } = await axios(
-				`https://api.unsplash.com/photos/?client_id=${REACT_APP_ACCESS_KEY}
-				`
-			);
-			savedData(data);
-			console.log(data);
-		};
-		fetchImages();
-		setLoading(false);
-	};
 	let skeletonCards = [];
 	_.times(8, (i) => {
 		skeletonCards.push(

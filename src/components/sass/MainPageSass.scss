@@ -4,6 +4,9 @@
 		width: 60%;
 		margin: 0 auto;
 	}
+	.MuiToolbar-root {
+		display: flex;
+	}
 }
 
 @include breakpoint-up(large) {
@@ -12,6 +15,10 @@
 
 		margin: 0 auto;
 	}
+}
+
+.MuiToolbar-root {
+	display: inline;
 }
 
 .wholeImageList {
@@ -24,6 +31,8 @@
 	width: auto !important;
 }
 
-.toggle--checkbox {
-	margin-left: 30px;
+.toggleForm {
+	.toggle--checkbox {
+		margin-left: 30px;
+	}
 }

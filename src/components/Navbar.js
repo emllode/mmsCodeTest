@@ -8,10 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-	menuButton: {
-		marginRight: theme.spacing(2),
-	},
-	title: {
+	searchBar: {
 		flexGrow: 1,
 	},
 }));
@@ -21,15 +18,18 @@ export default function Navbar(props) {
 
 	return (
 		<div>
-			<Toolbar>
-				<Typography variant='h6' className={classes.title}>
+			<Toolbar className={'toggleForm'}>
+				<Typography variant='h6' className={classes.searchBar}>
 					<Search
 						setQuery={props.setQuery}
 						query={props.query}
 						Searchpage={props.Searchpage}
 						queryFilterOnChange={props.queryFilterOnChange}
+						setColor={props.setColor}
+						fetchcolor={props.fetchcolor}
 					/>
 				</Typography>
+
 				<FormControlLabel
 					control={<Toggle />}
 					label={

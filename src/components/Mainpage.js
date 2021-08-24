@@ -12,31 +12,56 @@ const Mainpage = (props) => {
 	const [images, setImages] = useState();
 	const [loading, setLoading] = useState(false);
 	const [query, setQuery] = useState('');
+	const [color, setColor] = useState('');
 	const { REACT_APP_ACCESS_KEY } = process.env;
 
+	console.log(loading + 'is it loading?');
 	/*Func that does all fetches */
 	const Searchpage = async (e) => {
-		setImages(null);
-
-		if (!e) {
+		if (query === '' && color === '') {
 			const fetchImages = async () => {
 				const { data } = await axios(
 					`https://api.unsplash.com/photos/?client_id=${REACT_APP_ACCESS_KEY}
 					`
 				);
 				setImages(data);
-				console.log(data);
+				setLoading(true);
 			};
 			fetchImages();
-			setLoading(false);
 		} else {
-			const { data } = await axios.get(
-				`https://api.unsplash.com/search/photos/?client_id=${REACT_APP_ACCESS_KEY}&query=${e.target.value}
-				`
+			const fetchQuery = async () => {
+				const { data } = await axios(
+					`https://api.unsplash.com/search/photos/?client_id=${REACT_APP_ACCESS_KEY}&query=${e.target.value}
+					`
+				);
+
+				if (data.results.length < 1) {
+					const { data } = await axios(
+						`https://api.unsplash.com/photos/?client_id=${REACT_APP_ACCESS_KEY}
+						`
+					);
+					setImages(data);
+					setLoading(true);
+				} else {
+					setImages(data.results);
+					setLoading(true);
+				}
+			};
+			fetchQuery();
+		}
+	};
+
+	const fetchcolor = async (e) => {
+		if (query.length > 1) {
+			const { data } = await axios(
+				`https://api.unsplash.com/search/photos/?client_id=${REACT_APP_ACCESS_KEY}&query=${query}&color=${e}`
 			);
-			console.log(data.results);
 			setImages(data.results);
-			setLoading(!loading);
+		} else {
+			const { data } = await axios(
+				`https://api.unsplash.com/search/photos/?client_id=${REACT_APP_ACCESS_KEY}&color=${e}`
+			);
+			setImages(data.results);
 		}
 	};
 
@@ -44,10 +69,9 @@ const Mainpage = (props) => {
 	let queryFilterOnChange = (e) => {
 		console.log(e.target.value + 'this is target value');
 		setQuery(e.target.value);
-		setImages();
-		setLoading(true);
-
+		setImages('');
 		Searchpage(e);
+		setLoading(!true);
 	};
 
 	useEffect(() => {
@@ -63,6 +87,7 @@ const Mainpage = (props) => {
 			</ImageListItem>
 		);
 	});
+
 	return (
 		<div>
 			<Navbar
@@ -70,9 +95,11 @@ const Mainpage = (props) => {
 				query={query}
 				Searchpage={Searchpage}
 				queryFilterOnChange={queryFilterOnChange}
+				setColor={setColor}
+				fetchcolor={fetchcolor}
 			/>
 
-			{!loading ? (
+			{loading ? (
 				<Box className={'wholeImageList'}>
 					<ImageList cols={3} gap={7}>
 						{images &&

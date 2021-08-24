@@ -3,16 +3,13 @@
 		display: flex;
 		align-items: center;
 		height: 30px;
-
-		padding: 10px 20px;
 		border-radius: 999px;
-		width: 40vw;
+
 		margin: 0 auto;
 		max-width: 560px;
 
 		> input {
 			flex: 1;
-			padding: 10px 20px;
 			font-size: medium;
 			outline: none;
 			border: none;
@@ -26,5 +23,11 @@
 
 	.search__inputIcon {
 		color: gray;
+	}
+
+	.colorLensIcon {
+		:hover {
+			cursor: pointer;
+		}
 	}
 }

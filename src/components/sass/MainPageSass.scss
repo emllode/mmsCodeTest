@@ -1,9 +1,5 @@
 @import './mixins';
 @include breakpoint-up(medium) {
-	.wholeImageList {
-		width: 60%;
-		margin: 0 auto;
-	}
 	.MuiToolbar-root {
 		display: flex;
 	}
@@ -12,7 +8,21 @@
 @include breakpoint-up(large) {
 	.wholeImageList {
 		padding: 50px;
+		margin: 0 auto;
+	}
+	.wholeImageList {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
 
+@include breakpoint-up(xlarge) {
+	.wholeImageList {
+		padding: 50px;
+		margin: 0 auto;
+	}
+	.wholeImageList {
+		width: 60%;
 		margin: 0 auto;
 	}
 }
@@ -23,16 +33,35 @@
 
 .wholeImageList {
 	padding: 25px;
-	max-width: 100%;
 	max-height: 100%;
 }
 .MuiImageListItem-root {
-	height: 50% !important;
+	height: 30% !important;
 	width: auto !important;
 }
 
 .toggleForm {
 	.toggle--checkbox {
 		margin-left: 30px;
+	}
+}
+
+@include breakpoint-down(medium) {
+	.MuiToolbar-root {
+		display: inline !important;
+		padding: 20px;
+	}
+
+	.search .search__input {
+		width: 80% !important;
+	}
+	.MuiImageListItem-root {
+		margin: 0 auto;
+	}
+}
+
+@include breakpoint-down(small) {
+	.MuiToolbar-root {
+		display: inline !important;
 	}
 }

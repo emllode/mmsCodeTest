@@ -101,7 +101,7 @@ const Mainpage = (props) => {
 
 			{loading ? (
 				<Box className={'wholeImageList'}>
-					<ImageList cols={3} gap={7}>
+					<ImageList cols={3} gap={10}>
 						{images &&
 							images.map((item) => (
 								<ImageListItem key={item.id}>
